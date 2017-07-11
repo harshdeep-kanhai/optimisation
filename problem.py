@@ -41,30 +41,30 @@ print("validation")
 fig, ax = plt.subplots(figsize=(10, 10))
 xh = np.linspace(0, 100)
 
-# plot the constraints again
+# plotting the constraints
 plt.plot(xh, 110 - xh, lw=3, label='Max Plant Capacity')
 plt.plot(xh, (300 - 3*xh)/2, lw=3, label='Additive A')
 plt.plot(xh, (280 - xh)/3, lw=3, label='Additive B')
 plt.plot(np.zeros_like(xh), xh, lw=3, label='XH non-negative')
 plt.plot(xh, np.zeros_like(xh), lw=3, label='XS non-negative')
 
-# plot the possible (xh, xs) pairs
+# plotting the possible (xh, xs) pairs
 pairs = [(xh, xs) for xh in np.arange(101)
                 for xs in np.arange(101)
                 if (xh + xs) <= 110
                 and (3 * xh + 2* xs) <= 300
                 and (xh + 3 * xs) <=280]
 
-# split these into our variables
+# splitting these into our variables
 xh, xs = np.hsplit(np.array(pairs), 2)
 
-# caculate the objective function at each pair
+# caculating the objective function at each pair
 z = 80*xh + 200*xs  # the objective function
 
-# plot the results
+# plotting the results
 plt.scatter(xh, xs, c=z, cmap='jet', label='profit', zorder=3)
 
-# labels and stuff
+# labels and legends
 cb = plt.colorbar()
 cb.set_label('profit', fontsize=14)
 plt.xlabel('XH (no. of high grade barrel)', fontsize=16)
